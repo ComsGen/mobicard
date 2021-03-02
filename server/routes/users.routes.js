@@ -34,6 +34,8 @@ router.post('/register', validationMiddleware.register, async(req, res) => {
             res.status(201).json({
                 message: 'User registration was successful'
             })
+        }).catch((err) => {
+            console.log(`${err} unable to register client`)
         })
     })
 });
@@ -99,6 +101,7 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), async(r
                 message: 'Unauthorized',
                 success: false
             })
+
         }
     } catch (error) {
         res.status(500).json({
